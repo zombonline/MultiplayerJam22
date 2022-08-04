@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Boring Paul
   m_EditorClassIdentifier: 
   controlUp: 119
-  controlDown: 97
-  controlLeft: 115
+  controlDown: 115
+  controlLeft: 97
   controlRight: 100
   slideMiniGameSprites:
   - {fileID: 21300000, guid: 131a0e7542f35934bad13aa3ed7439d9, type: 3}
   - {fileID: 21300000, guid: 61a8ec6b6550b4346815bb0fd9a7d091, type: 3}
-  - {fileID: 21300000, guid: 8624e7d4e4ab8a14a8331d5b186ca99f, type: 3}
-  - {fileID: 21300000, guid: 2e6f7fbfe852f864e9aad66e3321a1db, type: 3}
+  - {fileID: 21300000, guid: a75f14f4d54ae834baa7be4dd96ccf34, type: 3}
+  - {fileID: 21300000, guid: f39df040e59c2074e969f0dfe798cfff, type: 3}
   lobMinigameSprites: []
   noises:
   - {fileID: 8300000, guid: d18124a0015770b4da90e45e11bfe6ac, type: 3}

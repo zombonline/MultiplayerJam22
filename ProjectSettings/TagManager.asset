@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - Tankard
+  - Barrel
   layers:
   - Default
   - TransparentFX

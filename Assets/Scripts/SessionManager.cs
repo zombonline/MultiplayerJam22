@@ -8,6 +8,7 @@ public class SessionManager : MonoBehaviour
     [SerializeField] public int maxHighScoreModeLoops;
     public int highScoreModeLoops;
 
+    public int tankardsCaught, barrelsCaught, glassesCleaned;
 
     private void Awake()
     {
@@ -22,7 +23,6 @@ public class SessionManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
-
     }
 
 }

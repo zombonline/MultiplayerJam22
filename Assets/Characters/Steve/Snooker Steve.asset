@@ -19,8 +19,8 @@ MonoBehaviour:
   slideMiniGameSprites:
   - {fileID: 21300000, guid: 7ee816d7de034514da5e71886c2b1586, type: 3}
   - {fileID: 21300000, guid: 5925deb977dbb8a47ae6c5b8486e1fd5, type: 3}
-  - {fileID: 21300000, guid: d7a2d3cdb3398a24fb08781707fa8acf, type: 3}
-  - {fileID: 21300000, guid: 801827ba24647c845a021e49d6b12e22, type: 3}
+  - {fileID: 21300000, guid: a75f14f4d54ae834baa7be4dd96ccf34, type: 3}
+  - {fileID: 21300000, guid: f39df040e59c2074e969f0dfe798cfff, type: 3}
   lobMinigameSprites: []
   noises:
   - {fileID: 8300000, guid: d18124a0015770b4da90e45e11bfe6ac, type: 3}
