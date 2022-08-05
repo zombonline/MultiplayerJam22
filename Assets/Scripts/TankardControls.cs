@@ -66,7 +66,7 @@ public class TankardControls : MonoBehaviour
         }
         catchArmCooldown -= Time.deltaTime;
 
-        if (!FindObjectOfType<LevelTimer>().timeUp)
+        if (!FindObjectOfType<LevelTimer>().timeUp && currentTankard!=null && !tankardFalling)
         {
             if (Input.GetKeyDown(throwCharacter.controlUp) && tankardMoving == false && currentTankard != null && !tankardCaught)
             {

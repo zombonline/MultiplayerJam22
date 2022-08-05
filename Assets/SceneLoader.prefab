@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Slide your pal a cold one!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 859a850a1149b9a46b6bcec32d4f0245, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4195443343169054022
@@ -431,8 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57cdcf1f235ae44e9cf2779595e28a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScenes: 0100000002000000
-  washInstructions: WASH AND DRY THE GLASSES!
+  gameScenes: 010000000200000003000000
+  washInstructions: WASH AND DRY THE TANKARDS!
   lobInstructions: GET THOSE BARRELS TO THE SECOND FLOOR!
   slideInstructions: SLIDE YOUR PAL A COLD ONE!
   endInstructions: WELL DONE!

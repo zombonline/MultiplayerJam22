@@ -17,10 +17,15 @@ MonoBehaviour:
   controlLeft: 97
   controlRight: 100
   slideMiniGameSprites:
-  - {fileID: 21300000, guid: 131a0e7542f35934bad13aa3ed7439d9, type: 3}
-  - {fileID: 21300000, guid: 61a8ec6b6550b4346815bb0fd9a7d091, type: 3}
-  - {fileID: 21300000, guid: a75f14f4d54ae834baa7be4dd96ccf34, type: 3}
-  - {fileID: 21300000, guid: f39df040e59c2074e969f0dfe798cfff, type: 3}
+  - {fileID: 21300000, guid: 795f960d9bf51ed47b664475b7dc35cf, type: 3}
+  - {fileID: 21300000, guid: ad6e0c535c6a3ae408cc31bd2537588f, type: 3}
+  - {fileID: 21300000, guid: 03dc02fb24b3c62499713352af64494c, type: 3}
+  - {fileID: 21300000, guid: 7fc26bc1761eb0f49b732fff621b27cb, type: 3}
   lobMinigameSprites: []
+  washMinigameSprites:
+  - {fileID: 21300000, guid: 756b80ed8a3383542afc692ce9e60304, type: 3}
+  - {fileID: 21300000, guid: bf4f70c4a1c84f94d9edbe79f0cc6b22, type: 3}
+  - {fileID: 21300000, guid: d09ad6b6bbf6c8e4e9473dd44fa904fc, type: 3}
+  - {fileID: 21300000, guid: 46b4ba6305bef564ab1a4d65b86b443b, type: 3}
   noises:
   - {fileID: 8300000, guid: d18124a0015770b4da90e45e11bfe6ac, type: 3}

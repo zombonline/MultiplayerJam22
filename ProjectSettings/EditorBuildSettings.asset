@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LobMinigame.unity
     guid: 95a133d2e16c6e74f8b696d1ce067252
   - enabled: 1
+    path: Assets/Scenes/WashMinigame.unity
+    guid: 6f1160557dcceb44b8d0acee725d0086
+  - enabled: 1
     path: Assets/Scenes/HighScoreEndScene.unity
     guid: 0ae275912bbb8bf4ab882cb3f8bf9b69
   m_configObjects:

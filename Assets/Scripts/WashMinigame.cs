@@ -20,16 +20,31 @@ public class WashMinigame : MonoBehaviour
     [SerializeField] Transform dirtyPoint, wetPoint, cleanPoint;
     [SerializeField] Transform dryCharacterLeftArm, dryCharacterRightArm, washCharacterLeftArm, washCharacterRightArm;
     bool dryLeftPressed = false, washLeftPressed = false;
+    bool levelOver = false;
 
     [SerializeField] int buttonPresses = 0;
     [SerializeField] int buttonPressesNeeded = 50;
 
     bool glassBroken = false;
+    [SerializeField] ParticleSystem glassBrokenParticles;
+
+    Vector3 dryLeftOriginalPos, dryRightOriginalPos, washLeftOriginalPos, washRightOriginalPos;
 
     private void Awake()
     {
         AssignCharacters();
         GetNewGlass();
+        dryLeftOriginalPos = dryCharacterLeftArm.position;
+        dryRightOriginalPos = dryCharacterRightArm.position;
+        washLeftOriginalPos = washCharacterLeftArm.position;
+        washRightOriginalPos = washCharacterRightArm.position;
+
+        buttonPressesNeeded += (FindObjectOfType<SessionManager>().highScoreModeLoops * 10);
+
+        washCharacterLeftArm.GetComponent<SpriteRenderer>().sprite = washCharacter.washMinigameSprites[0];
+        washCharacterRightArm.GetComponent<SpriteRenderer>().sprite = washCharacter.washMinigameSprites[1];
+        dryCharacterLeftArm.GetComponent<SpriteRenderer>().sprite = dryCharacter.washMinigameSprites[2];
+        dryCharacterRightArm.GetComponent<SpriteRenderer>().sprite = dryCharacter.washMinigameSprites[3];
     }
 
     void GetNewGlass()
@@ -41,7 +56,14 @@ public class WashMinigame : MonoBehaviour
 
     private void Update()
     {
-        MoveArms();
+        if (FindObjectOfType<LevelTimer>().timeUp && !levelOver)
+        {
+            StartCoroutine(LevelOver());
+        }
+        if (!levelOver)
+        {
+            MoveArms();
+        }
     }
 
     void AssignCharacters()
@@ -61,99 +83,133 @@ public class WashMinigame : MonoBehaviour
 
     void MoveArms()
     {
-        if (currentState == GlassState.Dirty)
+        if (!glassBroken)
         {
-            if (Input.GetKeyDown(washCharacter.controlLeft))
+            if (currentState == GlassState.Dirty)
             {
-                if (washLeftPressed)
+                if (Input.GetKeyDown(washCharacter.controlLeft))
                 {
-                    glassBroken = true;
-                    StartCoroutine(BreakGlass());
-                }
-                else
-                {
-                washCharacterLeftArm.transform.position = new Vector3(washCharacterLeftArm.position.x, washCharacterLeftArm.position.y + 1, washCharacterLeftArm.position.z);
-                washCharacterRightArm.transform.position = new Vector3(washCharacterRightArm.position.x, washCharacterRightArm.position.y - 1, washCharacterRightArm.position.z);
+                    if (washLeftPressed && buttonPresses > 0)
+                    {
+                        glassBroken = true;
+                        StartCoroutine(BreakGlass());
+                        washCharacterLeftArm.transform.position = new Vector3(washLeftOriginalPos.x, washLeftOriginalPos.y, washCharacterLeftArm.position.z);
+                        washCharacterRightArm.transform.position = new Vector3(washRightOriginalPos.x, washRightOriginalPos.y, washCharacterRightArm.position.z);
+                    }
+                    else
+                    {
+                        washCharacterLeftArm.transform.position = new Vector3(washLeftOriginalPos.x, washLeftOriginalPos.y + 1, washCharacterLeftArm.position.z);
+                        washCharacterRightArm.transform.position = new Vector3(washRightOriginalPos.x, washRightOriginalPos.y - 1, washCharacterRightArm.position.z);
 
-                washLeftPressed = true;
-                buttonPresses++;
+                        washLeftPressed = true;
+                        buttonPresses++;
+                    }
+                }
+                if (Input.GetKeyDown(washCharacter.controlRight))
+                {
+                    if (!washLeftPressed && buttonPresses > 0)
+                    {
+                        glassBroken = true;
+                        StartCoroutine(BreakGlass());
+                        washCharacterLeftArm.transform.position = new Vector3(washLeftOriginalPos.x, washLeftOriginalPos.y, washCharacterLeftArm.position.z);
+                        washCharacterRightArm.transform.position = new Vector3(washRightOriginalPos.x, washRightOriginalPos.y, washCharacterRightArm.position.z);
+                    }
+                    else
+                    {
+                        washCharacterLeftArm.transform.position = new Vector3(washLeftOriginalPos.x, washLeftOriginalPos.y - 1, washCharacterLeftArm.position.z);
+                        washCharacterRightArm.transform.position = new Vector3(washRightOriginalPos.x, washRightOriginalPos.y + 1, washCharacterRightArm.position.z);
+
+                        washLeftPressed = false;
+                        buttonPresses++;
+                    }
+
+                }
+                if (buttonPresses >= buttonPressesNeeded)
+                {
+                    currentState = GlassState.Wet;
+                    LeanTween.move(currentGlass.gameObject, wetPoint.position, 0.2f);
+                    currentGlass.sprite = glassWet;
+                    buttonPresses = 0;
                 }
             }
-            if (Input.GetKeyDown(washCharacter.controlRight) && washLeftPressed)
+            if (currentState == GlassState.Wet)
             {
-                if(!washLeftPressed)
+                if (Input.GetKeyDown(dryCharacter.controlLeft))
                 {
-                    glassBroken = true;
-                    StartCoroutine(BreakGlass());
-                }
-                {
-                    washCharacterLeftArm.transform.position = new Vector3(washCharacterLeftArm.position.x, washCharacterLeftArm.position.y - 1, washCharacterLeftArm.position.z);
-                    washCharacterRightArm.transform.position = new Vector3(washCharacterRightArm.position.x, washCharacterRightArm.position.y + 1, washCharacterRightArm.position.z);
+                    if (dryLeftPressed && buttonPresses > 0)
+                    {
+                        glassBroken = true;
+                        StartCoroutine(BreakGlass());
+                        dryCharacterLeftArm.transform.position = new Vector3(dryLeftOriginalPos.x, dryLeftOriginalPos.y, dryCharacterLeftArm.position.z);
+                        dryCharacterRightArm.transform.position = new Vector3(dryRightOriginalPos.x, dryRightOriginalPos.y, dryCharacterRightArm.position.z);
+                    }
+                    else
+                    {
+                        dryCharacterLeftArm.transform.position = new Vector3(dryLeftOriginalPos.x, dryLeftOriginalPos.y + 1, dryCharacterLeftArm.position.z);
+                        dryCharacterRightArm.transform.position = new Vector3(dryRightOriginalPos.x, dryRightOriginalPos.y - 1, dryCharacterRightArm.position.z);
 
-                    washLeftPressed = false;
-                    buttonPresses++;
+                        dryLeftPressed = true;
+                        buttonPresses++;
+                    }
                 }
+                if (Input.GetKeyDown(dryCharacter.controlRight))
+                {
+                    if (!dryLeftPressed && buttonPresses > 0)
+                    {
+                        glassBroken = true;
+                        StartCoroutine(BreakGlass());
+                        dryCharacterLeftArm.transform.position = new Vector3(dryLeftOriginalPos.x, dryLeftOriginalPos.y, dryCharacterLeftArm.position.z);
+                        dryCharacterRightArm.transform.position = new Vector3(dryRightOriginalPos.x, dryRightOriginalPos.y, dryCharacterRightArm.position.z);
+                    }
+                    else
+                    {
+                        dryCharacterLeftArm.transform.position = new Vector3(dryLeftOriginalPos.x, dryLeftOriginalPos.y - 1, dryCharacterLeftArm.position.z);
+                        dryCharacterRightArm.transform.position = new Vector3(dryRightOriginalPos.x, dryRightOriginalPos.y + 1, dryCharacterRightArm.position.z);
 
-            }
-            if(buttonPresses >= buttonPressesNeeded)
-            {
-                currentState = GlassState.Wet;
-                LeanTween.move(currentGlass.gameObject, wetPoint.position, 0.2f);
-                currentGlass.sprite = glassWet;
-                buttonPresses = 0;
-            }
-        }
-        if(currentState == GlassState.Wet)
-        {
-            if (Input.GetKeyDown(dryCharacter.controlLeft))
-            {
-                if (dryLeftPressed)
-                {
-                    glassBroken = true;
-                    StartCoroutine(BreakGlass());
+                        dryLeftPressed = false;
+                        buttonPresses++;
+                    }
                 }
-                else
+                if (buttonPresses >= buttonPressesNeeded)
                 {
-                    dryCharacterLeftArm.transform.position = new Vector3(dryCharacterLeftArm.position.x, dryCharacterLeftArm.position.y + 1, dryCharacterLeftArm.position.z);
-                    dryCharacterRightArm.transform.position = new Vector3(dryCharacterRightArm.position.x, dryCharacterRightArm.position.y - 1, dryCharacterRightArm.position.z);
+                    currentState = GlassState.Clean;
+                    LeanTween.move(currentGlass.gameObject, cleanPoint.position, 0.2f);
+                    if (FindObjectOfType<SessionManager>())
+                    {
+                        FindObjectOfType<SessionManager>().glassesCleaned++;
+                    }
 
-                    dryLeftPressed = true;
-                    buttonPresses++;
+                    currentGlass.sprite = glassClean;
+                    GetNewGlass();
+                    buttonPresses = 0;
                 }
-            }
-            if (Input.GetKeyDown(dryCharacter.controlRight) && dryLeftPressed)
-            {
-                if (!dryLeftPressed)
-                {
-                    glassBroken = true;
-                    StartCoroutine(BreakGlass());
-                }
-                else
-                {
-                    dryCharacterLeftArm.transform.position = new Vector3(dryCharacterLeftArm.position.x, dryCharacterLeftArm.position.y - 1, dryCharacterLeftArm.position.z);
-                    dryCharacterRightArm.transform.position = new Vector3(dryCharacterRightArm.position.x, dryCharacterRightArm.position.y + 1, dryCharacterRightArm.position.z);
-
-                    dryLeftPressed = false;
-                    buttonPresses++;
-                }
-            }
-            if (buttonPresses >= buttonPressesNeeded)
-            {
-                currentState = GlassState.Clean;
-                LeanTween.move(currentGlass.gameObject, cleanPoint.position, 0.2f);
-                if (FindObjectOfType<SessionManager>())
-                {
-                    FindObjectOfType<SessionManager>().glassesCleaned++;
-                }
-                currentGlass.sprite = glassClean;
-                buttonPresses = 0;
             }
         }
     }
+
+    IEnumerator LevelOver()
+    {
+        levelOver = true;
+        yield return new WaitForSeconds(2f);
+        FindObjectOfType<SceneLoader>().LoadRandomGameScene();
+    }
+
     IEnumerator BreakGlass()
     {
+        currentGlass.enabled = false;
+        if (currentState == GlassState.Dirty)
+        {
+            glassBrokenParticles.transform.position = dirtyPoint.position;
+            glassBrokenParticles.Play();
+        }
+        else if(currentState == GlassState.Dirty)
+        {
+            glassBrokenParticles.transform.position = wetPoint.position;
+            glassBrokenParticles.Play();
+        }
         yield return new WaitForSeconds(1f);
-        Destroy(currentGlass);
+        buttonPresses = 0;
+        Destroy(currentGlass.gameObject);
         glassBroken = false;
         GetNewGlass();
     }

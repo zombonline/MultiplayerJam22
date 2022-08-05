@@ -7,6 +7,6 @@ using UnityEngine;
 public class Character : ScriptableObject
 {
     [SerializeField] public KeyCode controlUp, controlDown, controlLeft, controlRight;
-    [SerializeField] public Sprite[] slideMiniGameSprites, lobMinigameSprites;
+    [SerializeField] public Sprite[] slideMiniGameSprites, lobMinigameSprites, washMinigameSprites;
     [SerializeField] public AudioClip[] noises;
 }
