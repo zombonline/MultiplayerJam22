@@ -44,9 +44,17 @@ public class SceneLoader : MonoBehaviour
     {
         if (currentGameScenes.Count == 0)
         {
+            MusicPersist musicTrack = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicPersist>();
+            musicTrack.SpeedUp(0.25f);
+
             FindObjectOfType<SessionManager>().highScoreModeLoops++;
             if (FindObjectOfType<SessionManager>().highScoreModeLoops >= FindObjectOfType<SessionManager>().maxHighScoreModeLoops)
             {
+                foreach(MusicPersist backroundTrack in FindObjectsOfType<MusicPersist>())
+                {
+                    backroundTrack.FadeOut();
+                }
+
                 StartCoroutine(TransitionEndScene());
             
             }
@@ -70,7 +78,13 @@ public class SceneLoader : MonoBehaviour
 
         else
         {
-
+            if(currentGameScenes.Count == gameScenes.Count && FindObjectOfType<SessionManager>().highScoreModeLoops == 0)
+            {
+                foreach(MusicPersist backroundTrack in FindObjectsOfType<MusicPersist>())
+                {
+                    backroundTrack.FadeIn();
+                }
+            }
 
             var randomValue = Random.Range(0, currentGameScenes.Count);
 

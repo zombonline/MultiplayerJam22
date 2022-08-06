@@ -11,6 +11,8 @@ public class CatchZone : MonoBehaviour
         {
             FindObjectOfType<TankardControls>().tankardMoving = false;
             FindObjectOfType<TankardControls>().tankardCaught = true;
+            FindObjectOfType<TankardControls>().fingerSprite.enabled = true;
+
 
             collision.transform.position = catchHandPosition.position;
             Destroy(collision.gameObject, 0.25f);
@@ -23,6 +25,7 @@ public class CatchZone : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         FindObjectOfType<SessionManager>().tankardsCaught++;
+        FindObjectOfType<TankardControls>().fingerSprite.enabled = false;
         FindObjectOfType<TankardControls>().CatchArmSpriteCatching(false);
         FindObjectOfType<TankardControls>().tankardCaught = false;
     }

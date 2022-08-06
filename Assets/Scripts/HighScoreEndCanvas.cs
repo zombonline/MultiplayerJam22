@@ -124,7 +124,7 @@ public class HighScoreEndCanvas : MonoBehaviour
             {
                 glassAmount = FindObjectOfType<SessionManager>().glassesCleaned;
             }
-            glassText.text = "GLASSES CLEANED - " + glassAmount.ToString("00");
+            glassText.text = "TANKARDS CLEANED - " + glassAmount.ToString("00");
             yield return new WaitForSeconds(countUpTime / FindObjectOfType<SessionManager>().glassesCleaned);
         }
         tickSFX.Stop();

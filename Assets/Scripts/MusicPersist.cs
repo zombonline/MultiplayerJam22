@@ -9,6 +9,7 @@ public class MusicPersist : MonoBehaviour
     [SerializeField] float fadeSpeed;
     float targetVolume = 1f;
     [SerializeField] float speed;
+    float targetSpeed = 1f;
 
     bool coRoutineRunning = false;
     private void Awake()
@@ -32,10 +33,7 @@ public class MusicPersist : MonoBehaviour
 
     private void Update()
     {
-        if(!coRoutineRunning)
-        {
-            StartCoroutine(AdjustToTargetVolume());
-        }
+        
         audioSource.pitch = speed;
         audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Pitch", 1f / speed);
     }
@@ -45,12 +43,40 @@ public class MusicPersist : MonoBehaviour
         audioSource.volume = 0f;
         targetVolume = 1f;
         audioSource.Play();
+        StartCoroutine(AdjustToTargetVolume());
+
     }
     public void FadeOut()
     {
         audioSource.volume = 1f;
         targetVolume = 0f;
+        StartCoroutine(AdjustToTargetVolume());
     }
+
+    public void SpeedUp(float newSpeed)
+    {
+        Debug.Log("Speeding up!");
+        targetSpeed = targetSpeed += newSpeed;
+        
+        StartCoroutine(AdjustToTargetSpeed());
+    }
+
+    IEnumerator AdjustToTargetSpeed()
+    {
+        while (speed != targetSpeed)
+        {
+            if (speed < targetSpeed)
+            {
+                speed += 0.01f;
+            }
+            else if (speed > targetSpeed)
+            {
+                speed -= 0.01f;
+            }
+            yield return new WaitForSeconds(fadeSpeed / 100f);
+        }
+    }
+
     IEnumerator AdjustToTargetVolume()
     {
         coRoutineRunning = true;

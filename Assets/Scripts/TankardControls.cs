@@ -25,6 +25,7 @@ public class TankardControls : MonoBehaviour
     [Header("Catch Arm")]
     Character catchCharacter;
     [SerializeField] SpriteRenderer catchArmSprite;
+    [SerializeField] public SpriteRenderer fingerSprite;
     [SerializeField] GameObject catchZone;
     [SerializeField] float catchLength;
     [SerializeField] float catchArmCooldownLength;

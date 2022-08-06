@@ -21,6 +21,8 @@ public class LobMinigame : MonoBehaviour
     [SerializeField] Transform barrelIndicator;
     [SerializeField] float barrelIndicatorYStartPos;
 
+    [SerializeField] Animator catchAnimator;
+    bool moving = false;
     private void Start()
     {
         int randomValue = Random.Range(0, 100);
@@ -57,12 +59,29 @@ public class LobMinigame : MonoBehaviour
 
             if (Input.GetKey(catchCharacter.controlLeft) && catchingSprite.transform.position.x > -catchCharacterXBoundary)
             {
-
+                if(!moving)
+                {
+                    moving = true;
+                    catchAnimator.CrossFade("lobcatchmove", 0f, 0);
+                }
                 catchingSprite.transform.parent.position -= new Vector3(catchCharacterSpeed * Time.deltaTime, 0f, 0f);
             }
             else if (Input.GetKey(catchCharacter.controlRight) && catchingSprite.transform.position.x < catchCharacterXBoundary)
             {
+                if (!moving)
+                {
+                    moving = true;
+                    catchAnimator.CrossFade("lobcatchmove", 0f, 0);
+                }
                 catchingSprite.transform.parent.position += new Vector3(catchCharacterSpeed * Time.deltaTime, 0f, 0f);
+            }
+            else
+            {
+                if (moving)
+                {
+                    catchAnimator.CrossFade("lobcatchidle", 0, 0);
+                    moving = false;
+                }
             }
         }
         else if(!levelOver)

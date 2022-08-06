@@ -173,7 +173,7 @@ public class WashMinigame : MonoBehaviour
                 if (buttonPresses >= buttonPressesNeeded)
                 {
                     currentState = GlassState.Clean;
-                    LeanTween.move(currentGlass.gameObject, cleanPoint.position, 0.2f);
+                    LeanTween.move(currentGlass.gameObject, cleanPoint.position, 0.8f);
                     if (FindObjectOfType<SessionManager>())
                     {
                         FindObjectOfType<SessionManager>().glassesCleaned++;
