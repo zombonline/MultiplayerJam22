@@ -20,6 +20,9 @@ public class HighScoreEndCanvas : MonoBehaviour
     [SerializeField] AudioClip thudSfx;
     AudioSource tickSFX;
 
+    [SerializeField] TextMeshProUGUI rankText;
+    [SerializeField] float sRank, aRank, bRank, cRank, fRank, zRank;
+
     private void Awake()
     {
         tickSFX = GetComponent<AudioSource>();
@@ -34,13 +37,41 @@ public class HighScoreEndCanvas : MonoBehaviour
         {
             PlayerPrefs.SetFloat("HIGH SCORE", totalScore);
         }
+
+        if(totalScore >= sRank)
+        {
+            rankText.text = "S";
+        }
+        else if(totalScore >= aRank)
+        {
+            rankText.text = "A";
+        }
+        else if (totalScore >= bRank)
+        {
+            rankText.text = "B";
+        }
+        else if (totalScore >= cRank)
+        {
+            rankText.text = "C";
+        }
+        else if (totalScore >= fRank)
+        {
+            rankText.text = "F";
+        }
+        else if (totalScore >= zRank)
+        {
+            rankText.text = "Z";
+        }
+
+
     }
+
 
 
     IEnumerator MenuStart()
     {
-        LeanTween.move(tankardText.gameObject, tankardPos, 1f);
-        yield return new WaitForSeconds(0.9f);
+        LeanTween.move(tankardText.gameObject, tankardPos, 0.5f);
+        yield return new WaitForSeconds(0.4f);
         AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         tankardText.text = "Pints slid - " + tankardAmount.ToString("00");
@@ -59,8 +90,8 @@ public class HighScoreEndCanvas : MonoBehaviour
             yield return new WaitForSeconds(countUpTime / FindObjectOfType<SessionManager>().tankardsCaught);
         }
         tickSFX.Stop();
-        LeanTween.move(barrelText.gameObject, barrelPos, 1f);
-        yield return new WaitForSeconds(0.9f);
+        LeanTween.move(barrelText.gameObject, barrelPos, 0.5f);
+        yield return new WaitForSeconds(0.4f);
         AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (barrelAmount < FindObjectOfType<SessionManager>().barrelsCaught)
@@ -78,8 +109,8 @@ public class HighScoreEndCanvas : MonoBehaviour
             yield return new WaitForSeconds(countUpTime / FindObjectOfType<SessionManager>().barrelsCaught);
         }
         tickSFX.Stop();
-        LeanTween.move(glassText.gameObject, glassPos, 1f);
-        yield return new WaitForSeconds(0.9f);
+        LeanTween.move(glassText.gameObject, glassPos, 0.5f);
+        yield return new WaitForSeconds(0.4f);
         AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (glassAmount < FindObjectOfType<SessionManager>().glassesCleaned)
@@ -97,8 +128,8 @@ public class HighScoreEndCanvas : MonoBehaviour
             yield return new WaitForSeconds(countUpTime / FindObjectOfType<SessionManager>().glassesCleaned);
         }
         tickSFX.Stop();
-        LeanTween.move(totalScoreText.transform.parent.gameObject, totalScorePos, 1f);
-        yield return new WaitForSeconds(0.9f);
+        LeanTween.move(totalScoreText.transform.parent.gameObject, totalScorePos, 0.5f);
+        yield return new WaitForSeconds(0.4f);
         AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (totalScoreDisplay < totalScore)
@@ -120,8 +151,16 @@ public class HighScoreEndCanvas : MonoBehaviour
             yield return new WaitForSeconds(countUpTime / totalScore);
         }
         tickSFX.Stop();
-        LeanTween.move(highScoreText.transform.parent.gameObject, highScorePos, 1f);
-        yield return new WaitForSeconds(0.9f);
+
+        //rank appears
+        yield return new WaitForSeconds(0.4f);
+        rankText.enabled = true;
+        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        yield return new WaitForSeconds(0.4f);
+        
+        //high score appears
+        LeanTween.move(highScoreText.transform.parent.gameObject, highScorePos, 0.5f);
+        yield return new WaitForSeconds(0.4f);
         AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (highScoreDisplay < highScore)
@@ -143,10 +182,12 @@ public class HighScoreEndCanvas : MonoBehaviour
             yield return new WaitForSeconds(countUpTime / highScore);
         }
         tickSFX.Stop();
-        LeanTween.move(menuButton.gameObject, menuButtonPos, 1f);
-        yield return new WaitForSeconds(0.9f);
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+
+        //menu button appears
         yield return new WaitForSeconds(0.4f);
+        LeanTween.move(menuButton.gameObject, menuButtonPos, 0.5f);
+        yield return new WaitForSeconds(0.4f);
+        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
     }
 
 }

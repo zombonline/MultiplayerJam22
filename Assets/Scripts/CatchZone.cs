@@ -13,7 +13,7 @@ public class CatchZone : MonoBehaviour
             FindObjectOfType<TankardControls>().tankardCaught = true;
 
             collision.transform.position = catchHandPosition.position;
-            Destroy(collision.gameObject, 1f);
+            Destroy(collision.gameObject, 0.25f);
             StartCoroutine(ReturnArm());
         }
     }
@@ -21,7 +21,7 @@ public class CatchZone : MonoBehaviour
 
     IEnumerator ReturnArm()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         FindObjectOfType<SessionManager>().tankardsCaught++;
         FindObjectOfType<TankardControls>().CatchArmSpriteCatching(false);
         FindObjectOfType<TankardControls>().tankardCaught = false;
