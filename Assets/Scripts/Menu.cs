@@ -8,5 +8,11 @@ public class Menu : MonoBehaviour
     {
         FindObjectOfType<SessionManager>().highScoreMode = true;
         FindObjectOfType<SceneLoader>().LoadRandomGameScene();
+
+            foreach (MusicPersist backroundTrack in FindObjectsOfType<MusicPersist>())
+            {
+                backroundTrack.FadeIn();
+            }
+        
     }
 }

@@ -83,7 +83,7 @@ public class TankardControls : MonoBehaviour
 
         ScaleTankard();
 
-
+        UpdateTankardLayer();
 
         if (!tankardMoving && currentTankard == null)
         {
@@ -126,9 +126,12 @@ public class TankardControls : MonoBehaviour
 
     public void UpdateTankardLayer()
     {
-        if (currentTankard.transform.position.y < catchZone.transform.position.y && !tankardCaught && catchZone.GetComponent<BoxCollider2D>().enabled == false)
+        if (currentTankard != null)
         {
-            currentTankard.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
+            if (currentTankard.transform.position.y < 0)
+            {
+                currentTankard.GetComponentInChildren<SpriteRenderer>().sortingOrder = 5;
+            }
         }
     }
 

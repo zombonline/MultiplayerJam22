@@ -6,7 +6,7 @@ public class LobMinigame : MonoBehaviour
 {
     bool levelOver = false;
 
-    [SerializeField] SpriteRenderer throwingSprite, catchingSprite;
+    [SerializeField] SpriteRenderer throwingSpriteLegs, throwingSpriteTorso, catchingSprite;
     [SerializeField] Rigidbody2D[] throwObjects;
     [SerializeField] float throwForce;
     Character throwCharacter, catchCharacter;
@@ -14,6 +14,8 @@ public class LobMinigame : MonoBehaviour
     [SerializeField] Transform throwAim;
     [SerializeField] float throwAimMaxRotate = 60f;
     [SerializeField] float throwAimSpeed;
+
+    [SerializeField] SpriteRenderer barrelButton;
 
     [SerializeField] float catchCharacterSpeed;
     [SerializeField] float catchCharacterXBoundary;
@@ -36,11 +38,18 @@ public class LobMinigame : MonoBehaviour
             throwCharacter = characters[1];
             catchCharacter = characters[0];
         }
+
+        barrelButton.sprite = throwCharacter.lobMinigameSprites[3];
+        throwingSpriteLegs.sprite = throwCharacter.lobMinigameSprites[0];
+        throwingSpriteTorso.sprite = throwCharacter.lobMinigameSprites[1];
+        catchingSprite.sprite = catchCharacter.lobMinigameSprites[2];
     }
 
     private void Update()
     {
-        float rZ = Mathf.SmoothStep(-throwAimMaxRotate, throwAimMaxRotate, Mathf.PingPong(Time.time * throwAimSpeed, 1));
+        var multiplier = FindObjectOfType<SessionManager>().highScoreModeLoops * 0.25f;
+
+        float rZ = Mathf.SmoothStep(-throwAimMaxRotate, throwAimMaxRotate, Mathf.PingPong(Time.time * (throwAimSpeed + multiplier), 1));
         throwAim.rotation = Quaternion.Euler(0, 0, rZ);
 
 
@@ -96,6 +105,7 @@ public class LobMinigame : MonoBehaviour
     {
         if(GameObject.FindGameObjectsWithTag("Barrel").Length > 0)
         {
+            barrelButton.enabled = false;
             if (GameObject.FindGameObjectWithTag("Barrel").transform.position.y > barrelIndicatorYStartPos)
             {
                 barrelIndicator.gameObject.SetActive(true);
@@ -112,6 +122,7 @@ public class LobMinigame : MonoBehaviour
         }
         else
         {
+            barrelButton.enabled = true;
             barrelIndicator.gameObject.SetActive(false);
         }
     }

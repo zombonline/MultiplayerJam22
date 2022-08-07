@@ -21,7 +21,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ad6e0c535c6a3ae408cc31bd2537588f, type: 3}
   - {fileID: 21300000, guid: 03dc02fb24b3c62499713352af64494c, type: 3}
   - {fileID: 21300000, guid: 7fc26bc1761eb0f49b732fff621b27cb, type: 3}
-  lobMinigameSprites: []
+  lobMinigameSprites:
+  - {fileID: 21300000, guid: 8f8a1147947201844b880fdb0bec8437, type: 3}
+  - {fileID: 21300000, guid: 9bec6cc4d8ec8714d958a145faea9570, type: 3}
+  - {fileID: 21300000, guid: bf549e2e61e2b0641be02afef8e32fc5, type: 3}
+  - {fileID: 21300000, guid: d75004985e7b8184abe425579502897f, type: 3}
   washMinigameSprites:
   - {fileID: 21300000, guid: 756b80ed8a3383542afc692ce9e60304, type: 3}
   - {fileID: 21300000, guid: bf4f70c4a1c84f94d9edbe79f0cc6b22, type: 3}

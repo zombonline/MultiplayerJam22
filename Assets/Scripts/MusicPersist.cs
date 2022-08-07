@@ -75,11 +75,11 @@ public class MusicPersist : MonoBehaviour
             }
             yield return new WaitForSeconds(fadeSpeed / 100f);
         }
+        
     }
 
     IEnumerator AdjustToTargetVolume()
     {
-        coRoutineRunning = true;
         while(audioSource.volume != targetVolume)
         {
             if (audioSource.volume < targetVolume)
@@ -92,7 +92,10 @@ public class MusicPersist : MonoBehaviour
             }
             yield return new WaitForSeconds(fadeSpeed / 100f);
         }
-        coRoutineRunning = false;
+        if(targetVolume == 0)
+        {
+            audioSource.Stop();
+        }
     }
 
 

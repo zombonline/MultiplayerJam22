@@ -70,6 +70,8 @@ public class HighScoreEndCanvas : MonoBehaviour
 
     IEnumerator MenuStart()
     {
+
+        yield return new WaitForSeconds(2.5f);
         LeanTween.move(tankardText.gameObject, tankardPos, 0.5f);
         yield return new WaitForSeconds(0.4f);
         AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);

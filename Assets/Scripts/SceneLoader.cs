@@ -89,13 +89,7 @@ public class SceneLoader : MonoBehaviour
 
         else
         {
-            if(currentGameScenes.Count == gameScenes.Count && FindObjectOfType<SessionManager>().highScoreModeLoops == 0)
-            {
-                foreach(MusicPersist backroundTrack in FindObjectsOfType<MusicPersist>())
-                {
-                    backroundTrack.FadeIn();
-                }
-            }
+            
 
             var randomValue = Random.Range(0, currentGameScenes.Count);
 

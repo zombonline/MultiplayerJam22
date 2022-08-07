@@ -5699,7 +5699,7 @@ MonoBehaviour:
   washCharacterLeftArm: {fileID: 179184428}
   washCharacterRightArm: {fileID: 393450299}
   buttonPresses: 0
-  buttonPressesNeeded: 20
+  buttonPressesNeeded: 15
   glassBrokenParticles: {fileID: 1003280389}
 --- !u!114 &1489459857
 MonoBehaviour:
