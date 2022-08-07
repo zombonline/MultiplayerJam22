@@ -62,7 +62,7 @@ public class LobMinigame : MonoBehaviour
                 if(!moving)
                 {
                     moving = true;
-                    catchAnimator.CrossFade("lobcatchmove", 0f, 0);
+                    catchAnimator.CrossFade("Move", 0f, 0);
                 }
                 catchingSprite.transform.parent.position -= new Vector3(catchCharacterSpeed * Time.deltaTime, 0f, 0f);
             }
@@ -71,7 +71,7 @@ public class LobMinigame : MonoBehaviour
                 if (!moving)
                 {
                     moving = true;
-                    catchAnimator.CrossFade("lobcatchmove", 0f, 0);
+                    catchAnimator.CrossFade("Move", 0f, 0);
                 }
                 catchingSprite.transform.parent.position += new Vector3(catchCharacterSpeed * Time.deltaTime, 0f, 0f);
             }
@@ -79,7 +79,7 @@ public class LobMinigame : MonoBehaviour
             {
                 if (moving)
                 {
-                    catchAnimator.CrossFade("lobcatchidle", 0, 0);
+                    catchAnimator.CrossFade("Idle", 0, 0);
                     moving = false;
                 }
             }

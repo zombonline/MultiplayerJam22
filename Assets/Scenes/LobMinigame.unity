@@ -646,7 +646,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013316632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1168500469}
@@ -701,7 +701,7 @@ Animator:
   m_GameObject: {fileID: 1013316632}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0500dcd2557f505448eb4c2103a2fc63, type: 2}
+  m_Controller: {fileID: 9100000, guid: d81f821dfa0858344a81ba9555aa5688, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1191,6 +1191,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3361331726235630916, guid: f3048d9f6d332224ebde449ac1c1f8dd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361331726235630916, guid: f3048d9f6d332224ebde449ac1c1f8dd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361331726235630916, guid: f3048d9f6d332224ebde449ac1c1f8dd, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361331726235630916, guid: f3048d9f6d332224ebde449ac1c1f8dd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361331726235630916, guid: f3048d9f6d332224ebde449ac1c1f8dd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -116.900024
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361331726235630916, guid: f3048d9f6d332224ebde449ac1c1f8dd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -72.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3048d9f6d332224ebde449ac1c1f8dd, type: 3}
 --- !u!1 &1738340599
@@ -1251,7 +1275,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 71e0b8204e8d9ad42922a3fec205afaa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d65f3e3c27bfb24db4a7ca24d610cdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1398,11 +1422,11 @@ MonoBehaviour:
   throwAim: {fileID: 826252969}
   throwAimMaxRotate: 45
   throwAimSpeed: 2
-  catchCharacterSpeed: 8
-  catchCharacterXBoundary: 8
+  catchCharacterSpeed: 4
+  catchCharacterXBoundary: 6
   barrelIndicator: {fileID: 1201688609}
   barrelIndicatorYStartPos: 6
-  catchAnimator: {fileID: 0}
+  catchAnimator: {fileID: 1013316636}
 --- !u!4 &1847931103
 Transform:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HighScoreEndCanvas : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI tankardText, barrelText, glassText, totalScoreText, highScoreText;
+    [SerializeField] TextMeshProUGUI tankardText, barrelText, glassText, totalScoreText, highScoreText, newText;
     [SerializeField] RectTransform tankardPos, barrelPos, glassPos, totalScorePos, highScorePos, menuButtonPos;
     [SerializeField] Button menuButton;
     int tankardAmount, barrelAmount, glassAmount;
@@ -17,7 +17,7 @@ public class HighScoreEndCanvas : MonoBehaviour
 
     [SerializeField] float countUpTime = 0.1f;
 
-    [SerializeField] AudioClip thudSfx;
+    [SerializeField] AudioClip thudSFX, waheySFX;
     AudioSource tickSFX;
 
     [SerializeField] TextMeshProUGUI rankText;
@@ -72,7 +72,7 @@ public class HighScoreEndCanvas : MonoBehaviour
     {
         LeanTween.move(tankardText.gameObject, tankardPos, 0.5f);
         yield return new WaitForSeconds(0.4f);
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         tankardText.text = "Pints slid - " + tankardAmount.ToString("00");
         while (tankardAmount < FindObjectOfType<SessionManager>().tankardsCaught)
@@ -92,7 +92,7 @@ public class HighScoreEndCanvas : MonoBehaviour
         tickSFX.Stop();
         LeanTween.move(barrelText.gameObject, barrelPos, 0.5f);
         yield return new WaitForSeconds(0.4f);
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (barrelAmount < FindObjectOfType<SessionManager>().barrelsCaught)
         {
@@ -111,7 +111,7 @@ public class HighScoreEndCanvas : MonoBehaviour
         tickSFX.Stop();
         LeanTween.move(glassText.gameObject, glassPos, 0.5f);
         yield return new WaitForSeconds(0.4f);
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (glassAmount < FindObjectOfType<SessionManager>().glassesCleaned)
         {
@@ -130,7 +130,7 @@ public class HighScoreEndCanvas : MonoBehaviour
         tickSFX.Stop();
         LeanTween.move(totalScoreText.transform.parent.gameObject, totalScorePos, 0.5f);
         yield return new WaitForSeconds(0.4f);
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (totalScoreDisplay < totalScore)
         {
@@ -155,13 +155,13 @@ public class HighScoreEndCanvas : MonoBehaviour
         //rank appears
         yield return new WaitForSeconds(0.4f);
         rankText.enabled = true;
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         
         //high score appears
         LeanTween.move(highScoreText.transform.parent.gameObject, highScorePos, 0.5f);
         yield return new WaitForSeconds(0.4f);
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
         yield return new WaitForSeconds(0.4f);
         while (highScoreDisplay < highScore)
         {
@@ -183,11 +183,30 @@ public class HighScoreEndCanvas : MonoBehaviour
         }
         tickSFX.Stop();
 
+        if(totalScore == highScore)
+        {
+            yield return new WaitForSeconds(0.15f);
+            AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
+            yield return new WaitForSeconds(0.15f);
+
+            AudioSource.PlayClipAtPoint(waheySFX, Camera.main.transform.position, 1f);
+            newText.enabled = true;
+            yield return new WaitForSeconds(0.65f);
+
+
+        }
+
         //menu button appears
         yield return new WaitForSeconds(0.4f);
         LeanTween.move(menuButton.gameObject, menuButtonPos, 0.5f);
         yield return new WaitForSeconds(0.4f);
-        AudioSource.PlayClipAtPoint(thudSfx, Camera.main.transform.position, 1f);
+        AudioSource.PlayClipAtPoint(thudSFX, Camera.main.transform.position, 1f);
+    }
+
+    public void LoadMenu()
+    {
+        Destroy(FindObjectOfType<SessionManager>());
+        FindObjectOfType<SceneLoader>().LoadScene("Menu");
     }
 
 }

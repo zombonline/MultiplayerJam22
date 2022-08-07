@@ -36,16 +36,24 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        var sceneBuildIndex = SceneManager.GetSceneByName(scene).buildIndex;
+        var sceneBuildIndex = 0;
+
+        if (scene == "Menu")
+        {
+            sceneBuildIndex = 0;
+
+        }else
+        {
+            sceneBuildIndex = 1;
+        }
         StartCoroutine(TransitionScene(sceneBuildIndex));
+
     }
 
     public void LoadRandomGameScene()
     {
         if (currentGameScenes.Count == 0)
         {
-            MusicPersist musicTrack = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicPersist>();
-            musicTrack.SpeedUp(0.25f);
 
             FindObjectOfType<SessionManager>().highScoreModeLoops++;
             if (FindObjectOfType<SessionManager>().highScoreModeLoops >= FindObjectOfType<SessionManager>().maxHighScoreModeLoops)
@@ -65,6 +73,9 @@ public class SceneLoader : MonoBehaviour
                 {
                     currentGameScenes.Add(scene);
                 }
+                MusicPersist musicTrack = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicPersist>();
+
+                musicTrack.SpeedUp(0.25f);
 
 
                 var randomValue = Random.Range(0, currentGameScenes.Count);
@@ -110,6 +121,7 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator TransitionScene(int scene)
     {
+        instructionsText.text = null;
         if(scene == 1)
         {
             instructionsText.text = slideInstructions;
