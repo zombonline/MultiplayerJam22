@@ -32,11 +32,12 @@ public class HighScoreEndCanvas : MonoBehaviour
             (FindObjectOfType<SessionManager>().tankardsCaught * tankardValue) +
             (FindObjectOfType<SessionManager>().barrelsCaught * barrelValue) +
             (FindObjectOfType<SessionManager>().glassesCleaned * glassValue);
-        highScore = PlayerPrefs.GetFloat("HIGH SCORE");
-        if(totalScore > highScore)
+        if (totalScore > highScore)
         {
             PlayerPrefs.SetFloat("HIGH SCORE", totalScore);
         }
+        highScore = PlayerPrefs.GetFloat("HIGH SCORE");
+
 
         if(totalScore >= sRank)
         {
